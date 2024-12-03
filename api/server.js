@@ -1,6 +1,7 @@
 const express = require('express');
 const nodeMailer = require('nodemailer');
 const cors = require('cors');
+const serverless = require('serverless-http');
 const dotenv = require('dotenv');
 
 const app = express();
@@ -40,12 +41,16 @@ app.post('/send-email', async (req, res) => {
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
             console.error('Error:', error);
-            res.status(500).send('An error occurred. Please try again later.');
+            res.status(500).send('An error occurred. Please try again later....');
         } else {
             res.status(200).send('Message sent successfully!');
         }
     });
 });
+
+app.get('/api/hello', (req, res) => {
+    res.json({ message: 'Hello from Express on Vercel!' });
+  });
 
 app.listen(8080, (err) => {
     if (err) {
@@ -55,3 +60,5 @@ app.listen(8080, (err) => {
         console.log('Server running on http://localhost:8080');
     }
 });
+module.exports = app;
+module.exports.handler = serverless(app);
