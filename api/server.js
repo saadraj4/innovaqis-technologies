@@ -11,7 +11,7 @@ dotenv.config();
 
 
 const transporter = nodeMailer.createTransport({
-    host: 'smtp.gmail.com',
+    host: 'smtp.innovaqistechnologies.com',
     port: 465,
     secure: true,
     auth: {
@@ -49,7 +49,7 @@ app.post('/send-email', async (req, res) => {
 });
 
 app.get('/api/hello', (req, res) => {
-    res.json({ message: 'Hello from Express on Vercel!' });
+    res.json({ message: 'Hello from Express' });
   });
 
 app.listen(8080, (err) => {
@@ -57,8 +57,9 @@ app.listen(8080, (err) => {
         console.error('Error:', err);
     }
     else {
-        console.log('Server running on http://localhost:8080');
+        console.log('Server running');
     }
 });
+
 module.exports = app;
 module.exports.handler = serverless(app);
